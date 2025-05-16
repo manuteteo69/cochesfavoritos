@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style
-        name="BottomNavIndicator.Purple"
-    parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
 
-    <item name="android:color">@color/red</item>
-</style>
 
-    </resources>
+    <!-- Indicador del item activo: color + tamaño + forma -->
+    <style name="BottomNavIndicator.Purple"
+        parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+
+        <!-- Color de fondo del cuadradito -->
+        <item name="android:color">@color/red</item>
+
+        <!-- Lo ensanchamos para que sea casi un cuadrado -->
+        <item name="android:width">50dp</item>
+        <item name="android:height">50dp</item>
+
+
+    </style>
+
+</resources>
+
+
