@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
@@ -21,18 +22,31 @@ public class FavoritesFragment extends Fragment {
     private RecyclerView recyclerView;
     private FavoriteAdapter adapter;
     private final List<Car> carList = new ArrayList<>();
-
+    private ImageView arrowIcon;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
+        arrowIcon = view.findViewById(R.id.arrow_icon);
+        recyclerView = view.findViewById(R.id.favorites_recycler_view);
+
         initializeCarList();
         setupRecyclerView(view);
 
+        // Toggle visual de la flecha
+        arrowIcon.setOnClickListener(v -> {
+            Object tag = arrowIcon.getTag();
+            boolean isDown = tag == null || "down".equals(tag.toString());
+
+            arrowIcon.setImageResource(isDown ? R.drawable.ic_arrow_up : R.drawable.ic_arrow_down);
+            arrowIcon.setTag(isDown ? "up" : "down");
+        });
+
         return view;
     }
+
 
     private void initializeCarList() {
         carList.clear();

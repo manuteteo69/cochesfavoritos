@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="6dp">
 
     <!-- Fondo con botón eliminar alineado a la derecha -->
     <FrameLayout
@@ -31,7 +31,9 @@
         android:layout_height="120dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
