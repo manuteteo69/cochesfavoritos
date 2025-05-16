@@ -2,32 +2,22 @@ package com.example.cochesdef;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
-
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         // Set default fragment
@@ -48,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new HomeFragment();
                 } else if (itemId == R.id.nav_deals) {
                     selectedFragment = new DealsFragment();
+
+                    // 💥 Ocultar badge cuando se pulsa
+                    BadgeDrawable badge = bottomNav.getBadge(R.id.nav_deals);
+                    if (badge != null) {
+                        badge.setVisible(false);
+                        // O también: bottomNav.removeBadge(R.id.nav_deals);
+                    }
                 } else if (itemId == R.id.nav_search) {
                     selectedFragment = new SearchFragment();
                 } else if (itemId == R.id.nav_favorites) {

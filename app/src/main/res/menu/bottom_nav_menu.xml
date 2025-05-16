@@ -20,4 +20,6 @@
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_profilez"
         android:title="" />
+
+
 </menu>
