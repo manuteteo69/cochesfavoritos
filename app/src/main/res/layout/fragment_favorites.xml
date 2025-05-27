@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/arrow_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_arrow_down"
             android:contentDescription="Toggle arrow" />

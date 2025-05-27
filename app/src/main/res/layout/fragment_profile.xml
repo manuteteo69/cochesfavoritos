@@ -1,15 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ProfileFragment">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Profile Fragment"
-        android:textSize="24sp" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <!-- ===== HEADER “Hello Johnny” ===== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/headerCard"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:backgroundTint="@color/profileHeader"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:shapeAppearanceOverlay="@style/ProfileHeaderShape">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="16dp">
+
+                <!-- Saludo -->
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Material3.TitleLarge"
+                    android:text="Hello Johnny,"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Material3.BodyMedium"
+                    android:text="Johnny@gmail.com"
+                    app:layout_constraintStart_toStartOf="@id/tvGreeting"
+                    app:layout_constraintTop_toBottomOf="@id/tvGreeting" />
+
+                <!-- Fila de accesos rápidos -->
+                <LinearLayout
+                    android:id="@+id/llShortcuts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <!-- Un atajo = item_profile_shortcut.xml -->
+                    <include
+                        android:id="@+id/shortcutAd"
+                        layout="@layout/item_profile_shortcut" />
+
+                    <include
+                        android:id="@+id/shortcutInbox"
+                        layout="@layout/item_profile_shortcut" />
+
+                    <include
+                        android:id="@+id/shortcutAnalytics"
+                        layout="@layout/item_profile_shortcut" />
+
+                    <include
+                        android:id="@+id/shortcutFav"
+                        layout="@layout/item_profile_shortcut" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===== BLOQUE: YOUR ACCOUNT ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:text="Your Account" />
+
+        <include
+            android:id="@+id/entryMyAds"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entrySavedSearches"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entryPayments"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entryProfile"
+            layout="@layout/item_profile_entry" />
+
+        <!-- ===== BLOQUE: SETTINGS ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:text="Settings" />
+
+        <include
+            android:id="@+id/entryCountry"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entryLanguage"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entryPreference"
+            layout="@layout/item_profile_entry" />
+
+        <include
+            android:id="@+id/entryNotifications"
+            layout="@layout/item_profile_entry" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

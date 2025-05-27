@@ -1,3 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">CochesDef</string>
+
+
+    <string name="my_ads">My Ads</string>
+    <string name="saved_searches">My Saved Searches</string>
+    <string name="payments">Payments</string>
+    <string name="profile">Profile</string>
+
+    <string name="country">Country</string>
+    <string name="language">Language</string>
+    <string name="preference">Preference</string>
+    <string name="notifications">Notifications</string>
 </resources>

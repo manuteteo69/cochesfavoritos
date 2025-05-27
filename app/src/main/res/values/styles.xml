@@ -16,6 +16,26 @@
 
     </style>
 
+
+    <style name="ProfileHeaderShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <!-- Solo redondeamos la esquina inferior derecha: -->
+        <item name="cornerSizeBottomRight">48dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+
+    <!-- shape para que la imagen sea redonda -->
+    <!-- values/styles.xml -->
+    <style name="ShortcutRoundShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>  <!-- o 50% si quieres círculo perfecto -->
+    </style>
+
+
+
 </resources>
 
 
