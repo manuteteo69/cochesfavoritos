@@ -1,5 +1,6 @@
 package com.example.cochesdef;
 
+import android.content.Intent;                     //  ← nuevo
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,13 +63,10 @@ public class ProfileFragment extends Fragment {
                 R.drawable.ic_profilez, getString(R.string.profile));
 
         /* ------------------------ Settings -------------------------------- */
-        // Country → bandera a la derecha
         configEntryWithDrawable(view, R.id.entryCountry,
                 R.drawable.ic_public, getString(R.string.country),
                 R.drawable.flag_uk);
 
-
-        // Language → texto “English” deshabilitado
         configEntryWithText(view, R.id.entryLanguage,
                 R.drawable.ic_language, getString(R.string.language),
                 "English", true);
@@ -78,11 +76,31 @@ public class ProfileFragment extends Fragment {
 
         configEntry(view, R.id.entryNotifications,
                 R.drawable.ic_notification, getString(R.string.notifications));
+
+        /* ---------------------- Listeners a cada fila --------------------- */
+        setEntryClick(R.id.entryMyAds,          getString(R.string.my_ads));
+        setEntryClick(R.id.entrySavedSearches,  getString(R.string.saved_searches));
+        setEntryClick(R.id.entryPayments,       getString(R.string.payments));
+        setEntryClick(R.id.entryProfile,        getString(R.string.profile));
+        setEntryClick(R.id.entryCountry,        getString(R.string.country));
+        setEntryClick(R.id.entryLanguage,       getString(R.string.language));
+        setEntryClick(R.id.entryPreference,     getString(R.string.preference));
+        setEntryClick(R.id.entryNotifications,  getString(R.string.notifications));
     }
 
     /* ----------------------------------------------------------------------- */
     /*  Helpers                                                                */
     /* ----------------------------------------------------------------------- */
+
+    /** Listener genérico que lanza DestinationActivity con el título */
+    private void setEntryClick(int entryId, String title) {
+        View entry = requireView().findViewById(entryId);
+        entry.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), DestinationActivity.class);
+            intent.putExtra(DestinationActivity.EXTRA_TITLE, title);
+            startActivity(intent);
+        });
+    }
 
     /** Atajo sin badge */
     private void configShortcut(View root, int id, int iconRes, String label) {
@@ -113,63 +131,32 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    /* ---------- Métodos configEntry… (sin cambios) ---------- */
 
-
-    /** Entrada simple: icono + título + flecha */
     private void configEntry(View root, int entryId, int iconRes, String title) {
         View entry = root.findViewById(entryId);
-
         ((ImageView) entry.findViewById(R.id.ivIcon)).setImageResource(iconRes);
         ((TextView)  entry.findViewById(R.id.tvTitle)).setText(title);
     }
 
-    /** Entrada con texto a la derecha (p. ej. “English”) */
     private void configEntryWithText(View root, int entryId, int iconRes,
                                      String title, String valueText, boolean disabled) {
-
         configEntry(root, entryId, iconRes, title);
-
         View entry = root.findViewById(entryId);
         FrameLayout container = entry.findViewById(R.id.valueContainer);
-
         TextView tv = new TextView(requireContext());
-        tv.setText(valueText);
-        tv.setTextSize(14);
-        tv.setEnabled(!disabled);
-
-        container.addView(tv);
-        container.setVisibility(View.VISIBLE);
-    }
-
-    /** Entrada con un pequeño layout (bandera, conmutador personalizado, etc.) */
-    private void configEntryWithLayout(View root, int entryId, int iconRes,
-                                       String title, int layoutRes) {
-
-        configEntry(root, entryId, iconRes, title);
-
-        View entry = root.findViewById(entryId);
-        FrameLayout container = entry.findViewById(R.id.valueContainer);
-
-        LayoutInflater.from(requireContext()).inflate(layoutRes, container, true);
-        container.setVisibility(View.VISIBLE);
+        tv.setText(valueText); tv.setTextSize(14); tv.setEnabled(!disabled);
+        container.addView(tv); container.setVisibility(View.VISIBLE);
     }
 
     private void configEntryWithDrawable(View root, int entryId, int iconRes,
                                          String title, int drawableRes) {
-
         configEntry(root, entryId, iconRes, title);
-
         View entry = root.findViewById(entryId);
         FrameLayout container = entry.findViewById(R.id.valueContainer);
-
         ImageView iv = new ImageView(requireContext());
         iv.setImageResource(drawableRes);
-        FrameLayout.LayoutParams lp =
-                new FrameLayout.LayoutParams(72, 72);   // 24 dp -> px más tarde si quieres
-        iv.setLayoutParams(lp);
-
-        container.addView(iv);
-        container.setVisibility(View.VISIBLE);
+        iv.setLayoutParams(new FrameLayout.LayoutParams(72, 72));
+        container.addView(iv); container.setVisibility(View.VISIBLE);
     }
-
 }
